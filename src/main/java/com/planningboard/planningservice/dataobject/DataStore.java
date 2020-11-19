@@ -22,7 +22,7 @@ public class DataStore {
 
     public static DataStore getTestStore(){
         DataStore store = new DataStore();
-        store.addWorkspace("100", new Workspace("MY WORKSPACE"));
+//        store.addWorkspace("100", new Workspace("MY WORKSPACE"));
         return store ;
     }
 }

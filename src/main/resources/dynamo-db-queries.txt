@@ -1,0 +1,30 @@
+aws dynamodb create-table \
+    --table-name Workspaces \
+    --attribute-definitions \
+        AttributeName=Name,AttributeType=S \
+        AttributeName=WorkspaceId,AttributeType=S \
+    --key-schema AttributeName=Name,KeyType=HASH AttributeName=WorkspaceId,KeyType=RANGE \
+    --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 \
+    --endpoint-url http://localhost:8000
+
+
+aws dynamodb list-tables --endpoint-url http://localhost:8000
+
+aws dynamodb --endpoint-url http://localhost:8000 put-item \
+--table-name Workspaces  \
+--item \
+    '{"Name": {"S": "FIRST_WORKSPACE"}, "WorkspaceId": {"S": "10000"}}' \
+--return-consumed-capacity TOTAL
+
+aws dynamodb --endpoint-url http://localhost:8000 put-item \
+--table-name Workspaces  \
+--item \
+    '{"Name": {"S": "SECOND_WORKSPACE"}, "Id": {"S": "20000"}}' \
+--return-consumed-capacity TOTAL
+
+aws dynamodb --endpoint-url http://localhost:8000 query --table-name Workspaces
+
+aws dynamodb --endpoint-url http://localhost:8000 scan --table-name Workspaces
+aws dynamodb --endpoint-url http://localhost:8000 delete-table --table-name Workspaces
+
+--key-conditions file://key-conditions.json
