@@ -1,0 +1,4 @@
+spring.profiles.active=dev,hsqldb
+
+docker run -p 8000:8000 amazon/dynamodb-local
+docker pull amazon/dynamodb-local

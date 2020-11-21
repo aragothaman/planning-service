@@ -19,12 +19,14 @@ aws dynamodb --endpoint-url http://localhost:8000 put-item \
 aws dynamodb --endpoint-url http://localhost:8000 put-item \
 --table-name Workspaces  \
 --item \
-    '{"Name": {"S": "SECOND_WORKSPACE"}, "Id": {"S": "20000"}}' \
+    '{"Name": {"S": "SECOND_WORKSPACE"}, "WorkspaceId": {"S": "20000"}}' \
 --return-consumed-capacity TOTAL
 
 aws dynamodb --endpoint-url http://localhost:8000 query --table-name Workspaces
+aws dynamodb query --table-name Workspaces
 
 aws dynamodb --endpoint-url http://localhost:8000 scan --table-name Workspaces
+aws dynamodb scan --table-name Workspaces
 aws dynamodb --endpoint-url http://localhost:8000 delete-table --table-name Workspaces
 
 --key-conditions file://key-conditions.json

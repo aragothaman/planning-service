@@ -15,10 +15,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 
 @Configuration
+@Profile("dev")
 @EnableDynamoDBRepositories(basePackageClasses = WorkspaceRepository.class)
-public class DynamoDBConfig {
+public class DevDynamoDBConfig {
 
     @Value("fakeId")
     private String amazonAWSAccessKey;
@@ -52,9 +54,17 @@ public class DynamoDBConfig {
         return new DynamoDBMapper(amazonDynamoDB, config);
     }
 
-    @Bean
-    public AmazonDynamoDB amazonDynamoDB() {
+    @Bean("amazonDynamoDB")
+    @Profile("dev")
+    public AmazonDynamoDB devAmazonDynamoDB() {
         return AmazonDynamoDBClientBuilder.standard().withCredentials(amazonAWSCredentialsProvider())
                 .withEndpointConfiguration(endpointConfiguration()).build();
     }
+
+//    @Bean
+//    @Profile("prod")
+//    public AmazonDynamoDB amazonDynamoDB() {
+//        return AmazonDynamoDBClientBuilder.standard().withCredentials(amazonAWSCredentialsProvider())
+//                .withEndpointConfiguration(endpointConfiguration()).build();
+//    }
 }
