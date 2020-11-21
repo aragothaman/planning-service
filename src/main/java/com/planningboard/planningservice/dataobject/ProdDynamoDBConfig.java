@@ -44,18 +44,12 @@ public class ProdDynamoDBConfig {
     }
 
     @Bean
-    public AwsClientBuilder.EndpointConfiguration endpointConfiguration() {
-        return new AwsClientBuilder.EndpointConfiguration("http://localhost:8000","us-west-2");
-    }
-
-    @Bean
     @Primary
     public DynamoDBMapper dynamoDBMapper(AmazonDynamoDB amazonDynamoDB, DynamoDBMapperConfig config) {
         return new DynamoDBMapper(amazonDynamoDB, config);
     }
 
     @Bean("amazonDynamoDB")
-    @Profile("prod")
     public AmazonDynamoDB prodAmazonDynamoDB() {
         return AmazonDynamoDBClientBuilder.standard()
                 .withCredentials(amazonAWSCredentialsProvider())
@@ -63,10 +57,4 @@ public class ProdDynamoDBConfig {
                 .build();
     }
 
-//    @Bean
-//    @Profile("prod")
-//    public AmazonDynamoDB amazonDynamoDB() {
-//        return AmazonDynamoDBClientBuilder.standard().withCredentials(amazonAWSCredentialsProvider())
-//                .withEndpointConfiguration(endpointConfiguration()).build();
-//    }
 }

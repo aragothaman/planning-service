@@ -55,16 +55,8 @@ public class DevDynamoDBConfig {
     }
 
     @Bean("amazonDynamoDB")
-    @Profile("dev")
-    public AmazonDynamoDB devAmazonDynamoDB() {
+    public AmazonDynamoDB amazonDynamoDB() {
         return AmazonDynamoDBClientBuilder.standard().withCredentials(amazonAWSCredentialsProvider())
                 .withEndpointConfiguration(endpointConfiguration()).build();
     }
-
-//    @Bean
-//    @Profile("prod")
-//    public AmazonDynamoDB amazonDynamoDB() {
-//        return AmazonDynamoDBClientBuilder.standard().withCredentials(amazonAWSCredentialsProvider())
-//                .withEndpointConfiguration(endpointConfiguration()).build();
-//    }
 }
