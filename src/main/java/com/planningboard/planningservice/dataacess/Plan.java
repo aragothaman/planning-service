@@ -16,7 +16,7 @@ public class Plan {
     PlanKey planKey ;
     String planId ;
 
-    @DynamoDBHashKey(attributeName = "WorkspaceId")
+    @DynamoDBHashKey(attributeName = "workspace_id")
     public String getWorkspaceId() {
         return planKey.getWorkspaceId();
     }
@@ -28,7 +28,7 @@ public class Plan {
         this.planKey.setWorkspaceId(workspaceId);
     }
 
-    @DynamoDBRangeKey(attributeName = "Name")
+    @DynamoDBRangeKey(attributeName = "plan_name")
     public String getName() {
         return this.planKey.getName();
     }
@@ -40,7 +40,7 @@ public class Plan {
         this.planKey.setName(name);
     }
 
-    @DynamoDBAttribute(attributeName = "PlanId")
+    @DynamoDBAttribute(attributeName = "plan_id")
     public String getPlanId() {
         return planId;
     }

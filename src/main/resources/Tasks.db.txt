@@ -1,0 +1,11 @@
+aws dynamodb create-table \
+--table-name Tasks \
+--attribute-definitions \
+    AttributeName=PlanId,AttributeType=S \
+    AttributeName=TaskId,AttributeType=S \
+--key-schema AttributeName=PlanId,KeyType=HASH AttributeName=TaskId,KeyType=RANGE \
+--provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 \
+--endpoint-url http://localhost:8000
+
+aws dynamodb --endpoint-url http://localhost:8000 put-item --table-name Tasks --item '{"PlanId": {"S": "10000"}, "TaskId": {"S": "Task1000"}, "TaskDetails":{"M": {"a":{"N":"100"}, "b":{"N":"200"}}}}' --return-consumed-capacity TOTAL
+aws dynamodb --endpoint-url http://localhost:8000 delete-table --table-name Tasks

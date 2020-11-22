@@ -7,6 +7,7 @@ import com.planningboard.planningservice.dataacess.repository.WorkspaceRepositor
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,7 +18,12 @@ public class PlanController {
     PlanRepository repository ;
 
     @GetMapping("/workspaces/{workspaceId}/plans")
-    public List<Plan> getWorkspace(@PathVariable String workspaceId) {
+    public List<Plan> getWorkspace(@PathVariable String workspaceId, @RequestParam(required = false) String name) {
+
+        if( name != null){
+            List<Plan> plans = this.repository.findByWorkspaceIdAndName(workspaceId, name);
+            return plans ;
+        }
         return this.repository.findByWorkspaceId(workspaceId);
     }
 }

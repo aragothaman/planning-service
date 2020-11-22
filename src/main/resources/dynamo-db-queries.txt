@@ -30,3 +30,4 @@ aws dynamodb scan --table-name Workspaces
 aws dynamodb --endpoint-url http://localhost:8000 delete-table --table-name Workspaces
 
 --key-conditions file://key-conditions.json
+

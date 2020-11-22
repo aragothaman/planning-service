@@ -1,0 +1,17 @@
+{
+  "AndAllFilters": [
+    {
+      "EqualsTo": {
+        "Key": "WorkspaceId",
+        "Value": {
+          "StringValue": "10000"
+        }
+      },
+      "EqualsTo": {
+        "Key": "Name",
+        "Value": {
+          "StringValue": "Authentication Team"
+        }
+      }
+    }]
+}

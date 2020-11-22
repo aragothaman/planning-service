@@ -10,6 +10,7 @@ import java.util.List;
 @EnableScan
 public interface PlanRepository extends CrudRepository<Plan, String>  {
     List<Plan> findByWorkspaceId(String workspaceId);
+    List<Plan> findByWorkspaceIdAndName(String workspaceId, String name);
 }
 
 

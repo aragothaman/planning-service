@@ -1,0 +1,60 @@
+aws dynamodb create-table \
+--table-name Plans \
+--attribute-definitions \
+    AttributeName=workspace_id,AttributeType=S \
+    AttributeName=plan_name,AttributeType=S \
+--key-schema AttributeName=workspace_id,KeyType=HASH AttributeName=plan_name,KeyType=RANGE \
+--provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 \
+--endpoint-url http://localhost:8000
+
+
+aws dynamodb --endpoint-url http://localhost:8000 put-item \
+    --table-name Plans  \
+    --item \
+        '{"workspace_id": {"S": "10000"}, "plan_name": {"S": "Authentication Team"}, "plan_id": {"S": "10000"}}' \
+    --return-consumed-capacity TOTAL
+
+aws dynamodb --endpoint-url http://localhost:8000 put-item \
+    --table-name Plans  \
+    --item \
+        '{"workspace_id": {"S": "10000"}, "plan_name": {"S": "Authentication Q3 Plan"}, "plan_id": {"S": "20000"}}' \
+    --return-consumed-capacity TOTAL
+
+//localhost
+aws dynamodb --endpoint-url http://localhost:8000 query --table-name Plans --key-conditions file://
+aws dynamodb --endpoint-url http://localhost:8000 scan --table-name Plans
+aws dynamodb --endpoint-url http://localhost:8000 delete-table --table-name Plans
+
+//aws account
+aws dynamodb scan --table-name Workspaces
+aws dynamodb query --table-name Workspaces
+--key-conditions file://key-conditions.json
+
+http://localhost:8080/workspaces/10000/plans?name="Authentication%20Team"
+
+aws dynamodb --endpoint-url http://localhost:8000 query --table-name Plans --key-condition-expression "workspace_id = 10000 AND plan_name = "Authentication Team""
+aws dynamodb --endpoint-url http://localhost:8000 query --table-name Plans --key-condition-expression "workspace_id=:v1 AND plan_name=:v2" \
+--expression-attribute-values "{ \":v1\" : { \"S\" : \"10000\" }, \":v2\":{\"S\" : \"Authentication Team\" }}"
+
+
+
+{
+  "AndAllFilters": [
+    {
+     "EqualsTo": {
+        "Key": "WorkspaceId",
+        "Value": {
+          "StringValue": "10000",
+        }
+      },
+    "EqualsTo": {
+      "Key": "Name",
+      "Value": {
+        "StringValue": "Authentication Team",
+      }
+    },
+   }]
+ }
+
+
+
