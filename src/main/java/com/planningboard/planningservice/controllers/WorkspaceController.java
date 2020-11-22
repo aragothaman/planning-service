@@ -1,13 +1,10 @@
 package com.planningboard.planningservice.controllers;
 
-import com.planningboard.planningservice.Greeting;
-import com.planningboard.planningservice.dataobject.DataStore;
-import com.planningboard.planningservice.dataobject.Workspace;
-import com.planningboard.planningservice.dataobject.WorkspaceRepository;
+import com.planningboard.planningservice.dataacess.Workspace;
+import com.planningboard.planningservice.dataacess.repository.WorkspaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.atomic.AtomicLong;
@@ -22,8 +19,7 @@ public class WorkspaceController {
 
     @GetMapping("/workspaces/{name}")
     public Workspace getWorkspace(@PathVariable String name) {
-        DataStore store = DataStore.getTestStore();
-        return store.getWorkspace(name);
+        return this.repository.findByName(name);
     }
 
     @GetMapping("/workspaces")

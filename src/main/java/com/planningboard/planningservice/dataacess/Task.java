@@ -1,4 +1,4 @@
-package com.planningboard.planningservice.dataobject;
+package com.planningboard.planningservice.dataacess;
 
 public class Task {
     long id ;

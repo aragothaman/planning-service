@@ -1,4 +1,4 @@
-package com.planningboard.planningservice.dataobject ;
+package com.planningboard.planningservice.dataacess;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
@@ -7,8 +7,6 @@ import org.springframework.data.annotation.Id;
 
 @DynamoDBTable(tableName = "Workspaces")
 public class Workspace {
-
-
 
     @Id
     WorkspaceKey workspaceKey;

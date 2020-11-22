@@ -1,11 +1,10 @@
 package com.planningboard.planningservice;
 
-import com.planningboard.planningservice.dataobject.Workspace;
-import com.planningboard.planningservice.dataobject.WorkspaceRepository;
+import com.planningboard.planningservice.dataacess.Workspace;
+import com.planningboard.planningservice.dataacess.repository.WorkspaceRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
