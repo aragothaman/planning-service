@@ -7,6 +7,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import org.springframework.data.annotation.Id;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @DynamoDBTable(tableName = "Plans")
@@ -15,6 +16,7 @@ public class Plan {
     @Id
     PlanKey planKey ;
     String planId ;
+    List<String> teams ;
 
     @DynamoDBHashKey(attributeName = "workspace_id")
     public String getWorkspaceId() {
@@ -47,5 +49,13 @@ public class Plan {
 
     public void setPlanId(String planId) {
         this.planId = planId;
+    }
+
+    public List<String> getTeams(){
+        return this.teams ;
+    }
+
+    public void setTeams(List<String> teams){
+        this.teams = teams ;
     }
 }
