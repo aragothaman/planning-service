@@ -1,11 +1,21 @@
-aws dynamodb create-table \
+aws dynamodb --endpoint-url http://localhost:8000 create-table \
 --table-name Plans \
 --attribute-definitions \
-    AttributeName=workspace_id,AttributeType=S \
-    AttributeName=plan_name,AttributeType=S \
+AttributeName=workspace_id,AttributeType=S \
+AttributeName=plan_name,AttributeType=S \
 --key-schema AttributeName=workspace_id,KeyType=HASH AttributeName=plan_name,KeyType=RANGE \
 --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 \
---endpoint-url http://localhost:8000
+--local-secondary-indexes     \
+"[{\"IndexName\": \"PlanIdIndex\",
+\"KeySchema\":[{\"AttributeName\":\"plan_id\",\"KeyType\":\"HASH\"}],
+\"Projection\":{\"ProjectionType\":\"INCLUDE\",  \"NonKeyAttributes\":[\"plan_name\"]}}]"
+
+
+--local-secondary-indexes     \
+    "[{\"IndexName\": \"AlbumTitleIndex\",
+	   \"KeySchema\":[{\"AttributeName\":\"Artist\",\"KeyType\":\"HASH\"},
+                      {\"AttributeName\":\"AlbumTitle\",\"KeyType\":\"RANGE\"}],
+	   \"Projection\":{\"ProjectionType\":\"INCLUDE\",  \"NonKeyAttributes\":[\"Genre\", \"Year\"]}}]"
 
 
 aws dynamodb --endpoint-url http://localhost:8000 put-item \

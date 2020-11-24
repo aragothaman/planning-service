@@ -11,6 +11,7 @@ import java.util.List;
 public interface PlanRepository extends CrudRepository<Plan, String>  {
     List<Plan> findByWorkspaceId(String workspaceId);
     List<Plan> findByWorkspaceIdAndName(String workspaceId, String name);
+    List<Plan> findByPlanId(String planId);
 }
 
 
